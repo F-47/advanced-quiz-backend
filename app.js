@@ -4,6 +4,7 @@ let bodyParser = require('body-parser');
 const quizController = require("./Controllers/quizController");
 require('dotenv').config()
 let app = express();
+let port = process.env.PORT || 3333;
 
 app.use(bodyParser.json());
 
@@ -21,6 +22,6 @@ app.get("/quiz", quizController.getAllQuizes);
 app.get("/quiz/:id", quizController.getQuizById);
 app.post('/quiz', quizController.quizCreatePost)
 
-app.listen(4000, () => {
-    console.log(`conected with port 4000`);
+app.listen(port, () => {
+    console.log(`conected with port ${port}`);
   });
