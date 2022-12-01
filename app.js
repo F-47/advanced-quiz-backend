@@ -18,6 +18,14 @@ mongoose.connect(dbURI)
 app.use(express.static('public')) // we can access any file in the public folder
 app.use(express.urlencoded({extended:true})) // so we can access the data coming from the input value
 
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 app.get("/quiz", quizController.getAllQuizes);
 app.get("/quiz/:id", quizController.getQuizById);
 app.post('/quiz', quizController.quizCreatePost)
