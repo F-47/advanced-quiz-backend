@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 app.get("/quiz", quizController.getAllQuizes);
 app.get("/quiz/:id", quizController.getQuizById);
 app.post('/quiz', quizController.quizCreatePost)
-app.delete('/quiz:id',quizController.quizDelete)
+app.delete('/quiz/id',quizController.quizDelete)
 
 app.listen(port, () => {
     console.log(`conected with port ${port}`);

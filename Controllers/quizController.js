@@ -26,6 +26,7 @@ exports.quizCreatePost = (req, res, next) => {
 
 exports.quizDelete = (req, res) => {
   let id = req.params.id;
+  console.log(id)
   Quiz.findByIdAndDelete(id)
       .then((result) => {
           res.json(result)
