@@ -1,5 +1,5 @@
 let Quiz = require("../Model/quiz");
-let bcrypt = require('bcrypt')
+let bcrypt = require("bcrypt");
 
 exports.getAllQuizes = async (req, res) => {
   Quiz.find()
@@ -15,24 +15,31 @@ exports.getQuizById = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.quizCreatePost = (req, res, next) => {
+exports.quizCreatePost = async (req, res, next) => {
   let quiz = new Quiz(req.body);
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(quiz.quizPassword, salt, (err, hash) => {
-      if (err) throw err;
-      //password is hashed
-      quiz.quizPassword = hash;
-      quiz
-        .save()
-        .then((result) => {
-          console.log(result);
-          res.json(result);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+  let result = await Quiz.findOne({ quizTitle: quiz.quizTitle });
+  if (result) {
+    return res.status(403).send({ message: "Quiz Already Exists" });
+  }
+  if (quiz.quizPassword) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(quiz.quizPassword, salt, (err, hash) => {
+        if (err) throw err;
+        //password is hashed
+        quiz.quizPassword = hash;
+      });
     });
-  });
+  }
+  quiz
+    .save()
+    .then((result) => {
+      console.log(result)
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.quizDelete = (req, res) => {
