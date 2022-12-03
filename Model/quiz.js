@@ -10,8 +10,12 @@ quizSchema = new mongoose.Schema({
     required:true
   },
   questions:[
-    {question:String,answerOptions:[{answerText:String,isCorrect:false}]}
-  ]
+    {question:String,answerOptions:[{answerText:String,isCorrect:false}]},
+  ],
+  quizPassword:{
+    type:String,
+    required:false
+  }
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);
