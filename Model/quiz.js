@@ -14,7 +14,7 @@ quizSchema = new mongoose.Schema({
   ],
   quizPassword:{
     type:String,
-    required:true
+    required:false
   },
 });
 
