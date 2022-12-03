@@ -14,8 +14,8 @@ quizSchema = new mongoose.Schema({
   ],
   quizPassword:{
     type:String,
-    required:false
-  }
+    required:true
+  },
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);
