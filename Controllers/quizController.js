@@ -20,7 +20,7 @@ exports.quizCreatePost = async (req, res, next) => {
 
   let result = await Quiz.findOne({ quizTitle: quiz.quizTitle });
   if (result) {
-    return res.status(403).send({ message: "Quiz Already Exists" });
+    return res.status(403).send({ message: "Quiz Name Already Exists" });
   }
   if (quiz.quizPassword) {
     bcrypt.genSalt(10, (err, salt) => {
@@ -28,18 +28,26 @@ exports.quizCreatePost = async (req, res, next) => {
         if (err) throw err;
         //password is hashed
         quiz.quizPassword = hash;
+        quiz
+          .save()
+          .then((result) => {
+            res.json(result);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     });
+  } else {
+    quiz
+      .save()
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  quiz
-    .save()
-    .then((result) => {
-      console.log(result)
-      res.json(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 };
 
 exports.quizDelete = (req, res) => {
