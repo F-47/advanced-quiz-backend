@@ -17,7 +17,7 @@ quizSchema = new mongoose.Schema({
     required:false
   },
   quizTime:{
-    type:number,
+    type:String,
     required:true
   }
 });
