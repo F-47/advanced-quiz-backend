@@ -16,6 +16,10 @@ quizSchema = new mongoose.Schema({
     type:String,
     required:false
   },
+  quizTime:{
+    type:number,
+    required:true
+  }
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);
