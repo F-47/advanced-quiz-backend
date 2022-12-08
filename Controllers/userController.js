@@ -23,7 +23,7 @@ exports.postRegister = (req, res) => {
 
   //check if their is any errors 
   if (errors.length > 0) {
-    res.json({ errors })
+    res.status(403).json({ errors })
   } else {
     User.findOne({ email: email })
       .then(user => {
