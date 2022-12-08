@@ -2,6 +2,7 @@ let express = require('express');
 let mongoose = require('mongoose')
 let bodyParser = require('body-parser');
 const quizController = require("./Controllers/quizController");
+const userController = require("./Controllers/userController");
 require('dotenv').config()
 let app = express();
 let port = process.env.PORT || 3333;
@@ -30,6 +31,7 @@ app.get("/quiz", quizController.getAllQuizes);
 app.get("/quiz/:id", quizController.getQuizById);
 app.post('/quiz', quizController.quizCreatePost)
 app.delete('/quiz/:id',quizController.quizDelete)
+app.post('/signup',userController.postRegister)
 
 app.listen(port, () => {
     console.log(`conected with port ${port}`);
