@@ -29,7 +29,7 @@ exports.postRegister = (req, res) => {
       .then(user => {
         errors.push({ msg: "Email is already registered" })
         if (user) {
-          return res.status(403).json({ errors })
+          res.status(403).json({ errors });
         } else {
           // if user doesn't exist create new one
           let newUser = new User({ firstname, lastname, email, password })
