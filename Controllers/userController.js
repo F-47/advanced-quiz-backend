@@ -1,5 +1,5 @@
 
-let User = require('../model/user')
+let User = require('../Model/user')
 let bcrypt = require('bcrypt')
 
 exports.postRegister = (req, res) => {
