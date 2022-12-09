@@ -1,6 +1,8 @@
 
 let User = require('../Model/user')
 let bcrypt = require('bcrypt')
+let jwt = require("jsonwebtoken")
+let JWT_SECRET = "as23re32523wrwer1@wer3#24324!()*asd^asdt3"
 
 exports.postRegister = (req, res) => {
   let { firstname, lastname, email, password } = req.body;
@@ -29,4 +31,21 @@ exports.postRegister = (req, res) => {
           })
         }
       })
+}
+exports.postLogin = async(req, res) => {
+  let {email,password} = req.body
+  let user = await User.findOne({email})
+  if(!user){
+    return res.json({ msg: "User Not Found" });
+  }
+  if(await bcrypt.compare(password,user.password)){
+    let token = jwt.sign({},JWT_SECRET);
+
+    if(res.status(201)){
+      return res.json({status:"ok",data:token})
+    }else{
+      return res.json({error:"error"})
+    }
+  }
+  res.json({status:"error",error:"Incorrect Password"})
 }
