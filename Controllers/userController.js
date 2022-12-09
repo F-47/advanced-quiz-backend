@@ -39,7 +39,7 @@ exports.postLogin = async(req, res) => {
     return res.json({ msg: "User Not Found" });
   }
   if(await bcrypt.compare(password,user.password)){
-    let token = jwt.sign({},JWT_SECRET);
+    let token = jwt.sign({email:user.email},JWT_SECRET);
 
     if(res.status(201)){
       return res.json({status:"ok",data:token})
@@ -48,4 +48,16 @@ exports.postLogin = async(req, res) => {
     }
   }
   res.json({status:"error",error:"Incorrect Password"})
+}
+exports.profile = async(req, res) => {
+  let {token} = req.body
+  try{
+    let user = jwt.verify(token,JWT_SECRET)
+    let userEmail = user.email
+    User.findOne({email:userEmail})
+      .then((data)=>res.send({status:"ok",data}))
+      .catch((err)=>res.send({status:"error",data:err}))
+  }catch(error){
+    console.log(error)
+  }
 }
