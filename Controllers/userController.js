@@ -35,7 +35,7 @@ exports.postRegister = (req, res) => {
 exports.postLogin = async(req, res) => {
   let {email,password} = req.body
   let user = await User.findOne({email})
-  if(!user && !password){
+  if(!email && !password){
     return res.json({ msg: "Please fill out all the fields" });
   }
   if(!user){
