@@ -36,7 +36,7 @@ exports.postLogin = async(req, res) => {
   let {email,password} = req.body
   let user = await User.findOne({email})
   if(!user){
-    return res.json({ msg: "User Not Found" });
+    return res.json({ msg: "Email is not registered" });
   }
   if(await bcrypt.compare(password,user.password)){
     let token = jwt.sign({email:user.email},JWT_SECRET);
