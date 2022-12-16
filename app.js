@@ -35,7 +35,7 @@ app.post('/quiz', quizController.quizCreatePost)
 app.delete('/quiz/:id',quizController.quizDelete)
 app.post('/signup',userController.postRegister)
 app.post('/login',userController.postLogin)
-app.post('/profile',userController.profile)
+app.get('/profile/:token',userController.profile)
 
 app.listen(port, () => {
     console.log(`conected with port ${port}`);

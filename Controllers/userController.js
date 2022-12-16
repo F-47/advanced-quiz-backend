@@ -53,7 +53,7 @@ exports.postLogin = async(req, res) => {
   res.json({status:"error",msg:"Incorrect Password"})
 }
 exports.profile = async(req, res) => {
-  let {token} = req.body
+  let token = req.params.token
   try{
     let user = jwt.verify(token,JWT_SECRET)
     let userEmail = user.email
