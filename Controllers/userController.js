@@ -64,3 +64,14 @@ exports.profile = async(req, res) => {
     console.log(error)
   }
 }
+exports.userDelete = (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  User.findByIdAndDelete(id)
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

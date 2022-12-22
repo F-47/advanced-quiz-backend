@@ -35,6 +35,7 @@ app.post('/quiz', quizController.quizCreatePost)
 app.delete('/quiz/:id',quizController.quizDelete)
 app.post('/signup',userController.postRegister)
 app.post('/login',userController.postLogin)
+app.delete('/user/:id',userController.userDelete)
 app.get('/profile/:token',userController.profile)
 
 app.listen(port, () => {
