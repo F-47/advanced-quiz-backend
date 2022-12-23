@@ -3,8 +3,8 @@ let mongoose = require('mongoose')
 let bodyParser = require('body-parser');
 const quizController = require("./Controllers/quizController");
 const userController = require("./Controllers/userController");
+const quizActivityController = require("./Controllers/quizActivityController");
 require('dotenv').config()
-
 
 let app = express();
 let port = process.env.PORT || 3333;
@@ -37,6 +37,8 @@ app.post('/signup',userController.postRegister)
 app.post('/login',userController.postLogin)
 app.delete('/user/:id',userController.userDelete)
 app.get('/profile/:token',userController.profile)
+app.post('/quizActivity',quizActivityController.postUserActivity)
+app.post('/quizActivity/:quizID',quizActivityController.getUserActivity)
 
 app.listen(port, () => {
     console.log(`conected with port ${port}`);
