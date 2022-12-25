@@ -1,17 +1,23 @@
-let mongoose = require("mongoose")
+let mongoose = require("mongoose");
 
 let quizActivity = new mongoose.Schema({
-    token:{
-        type:String,
-        required:true
+  token: {
+    type: String,
+    required: true,
+  },
+  quiz: {
+    quizTitle:{
+      type: String,
+      required: true,
     },
-    userAnswers:[Number],
-    quizID:{
-        type:String,
-        required:true
-    }
-})
+    quizID: {
+      type: String,
+      required: true,
+    },
+    userAnswers: [Number],
+  },
+});
 
-let QuizActivity = mongoose.model('QuizActivity', quizActivity)
+let QuizActivity = mongoose.model("QuizActivity", quizActivity);
 
-module.exports = QuizActivity
+module.exports = QuizActivity;
