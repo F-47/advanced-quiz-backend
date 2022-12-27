@@ -57,9 +57,8 @@ exports.profile = async (req, res) => {
   try {
     let user = jwt.verify(token, JWT_SECRET);
     let userEmail = user.email;
-
     const promise1 = User.findOne({ email: userEmail });
-    const promise2 = QuizActivity.find({ token });
+    const promise2 = QuizActivity.find({ email: userEmail });
     Promise.all([promise1, promise2]).then(([result1, result2]) => {
       res.json({ result1, result2 });
     });
