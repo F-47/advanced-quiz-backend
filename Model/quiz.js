@@ -19,6 +19,9 @@ quizSchema = new mongoose.Schema({
   quizTime:{
     type:String,
     required:false
+  },
+  email:{
+    type:String,
   }
 });
 

@@ -1,20 +1,18 @@
 let mongoose = require("mongoose");
 
 let quizActivity = new mongoose.Schema({
-  token: {
+  quizTitle: {
     type: String,
     required: true,
   },
-  quiz: {
-    quizTitle:{
-      type: String,
-      required: true,
-    },
-    quizID: {
-      type: String,
-      required: true,
-    },
-    userAnswers: [Number],
+  quizID: {
+    type: String,
+    required: true,
+  },
+  userAnswers: [Number],
+  email: {
+    type: String,
+    required: true,
   },
 });
 
