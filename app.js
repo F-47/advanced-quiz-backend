@@ -10,7 +10,7 @@ let app = express();
 let port = process.env.PORT || 3333;
 
 app.use(bodyParser.json());
-
+mongoose.set('strictQuery', true)
 //create mongodb
 let dbURI = process.env.MONGO_DB_URL
 mongoose.connect(dbURI)
